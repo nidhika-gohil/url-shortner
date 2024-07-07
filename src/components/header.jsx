@@ -24,7 +24,7 @@ const Header = () => {
     <>
       <nav className="flex justify-between items-center">
         <Link to="/">
-        <img src="./logo.png" className="h-14 w-28 border rounded-sm" alt="Trimrr logo"/>
+        <img src="/logo.png" className="h-14 w-28 border rounded-sm" alt="Trimrr logo"/>
         </Link>
         <div>
           {
@@ -40,7 +40,12 @@ const Header = () => {
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link2Icon className="mr-2 h-4 w-4 cursor-pointer"/>
-                My Link
+                {/* <Link to="/dashboard" className="flex"></Link> */}
+                <span onClick={()=>{
+                  navigate("/dashboard");
+                }}>
+                  My Link
+                </span>
               </DropdownMenuItem>
               <DropdownMenuItem className="text-red-400">
                 <LogOutIcon className="mr-2 h-4 w-4 cursor-pointer" />

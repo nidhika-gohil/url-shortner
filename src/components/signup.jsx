@@ -45,7 +45,7 @@ const Signup = () => {
     setErrors([]);
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().required("Email is required."),
+        name: Yup.string().required("Name is required."),
         email: Yup.string()
           .email("Invalid email")
           .required("Email is required."),
