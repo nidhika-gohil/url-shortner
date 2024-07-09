@@ -7,7 +7,15 @@ import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { Copy, Download, Trash } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
+import Location from "@/components/location-stats";
+import Device from "@/components/device-stats";
 
 const Link = () => {
   const {id} = useParams();
@@ -45,7 +53,7 @@ const Link = () => {
       {loading || loadingStats && (<BarLoader className="mb-4" width={"100%"} color="#36d7b7"></BarLoader>)}
       <div className="flex flex-col gap-8 sm:flex-row justify-between pt-4">
         <div className="flex flex-col items-start gap-8 rounded-lg sm:w-2/5">
-          <span className="text-6xl font-extrabold hover:underline cursor-pointer">{url?.title}</span>
+          <span className="text-5xl font-extrabold hover:underline cursor-pointer">{url?.title}</span>
           <a className="text-3xl text-blue-400 sm:text-4xl font-bold hover:underline cursor-pointer" href={`https://url-shortner-topaz-chi.vercel.app/${link}`} target="_blank" >
             https://url-shortner-topaz-chi.vercel.app/{link}
           </a>
@@ -71,8 +79,31 @@ const Link = () => {
           </div>
           <img src={url?.qr} alt="qr code" className='w-full self-center sm:self-start object-contain ring'/>
         </div>
-        <div className="sm:w-3/5">
-        </div>
+        <Card className="sm:w-3/5">
+          <CardHeader>
+            <CardTitle className="tetx-4xl font-extrabold">Stats</CardTitle>
+          </CardHeader>
+          {stats && stats?.length ? 
+            (<CardContent className="flex flex-col gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Total Clicks</CardTitle>
+                </CardHeader>
+                <CardContent>
+                <p>{stats?.length}</p>
+                </CardContent>
+              </Card>
+
+              <CardTitle>Location Data</CardTitle>
+              <Location stats={stats}/>
+              <CardTitle>Device Info</CardTitle>
+              <Device stats={stats}/>
+            </CardContent>) : (
+            <CardContent>
+              {loadingStats === false ? "No statistics yet" : "Loading statistics"}
+            </CardContent>
+          )}
+        </Card>
       </div>
     </>
   )
